@@ -18,11 +18,20 @@ manoeuvres do not depend on the pursuer's state, and the chased mouse does not s
 the chaser in any form the evader library expresses. The numbers behind these sentences are in
 `results/`, and the paper is `paper/main.pdf`.
 
-[preprint (PDF)](paper/main.pdf)
+[preprint (PDF)](paper/main.pdf) · [interactive demo](https://markov-switching-pursuit.streamlit.app)
 
 ![a held-out chase with the decoded state](results/animations/real_chase.gif)
 ![a simulated chase with a scripted switch from lead to pure pursuit, and the posterior catching it](results/animations/simulated_switch.gif)
 ![the steering probability around target manoeuvres in the mouse-and-mouse chases](results/animations/event_aligned.gif)
+
+## Interactive demo
+
+The demo at [markov-switching-pursuit.streamlit.app](https://markov-switching-pursuit.streamlit.app)
+runs in the browser, with nothing to install. In the playground you set up a simulated chase,
+choose the rule the pursuer steers by, and watch the model work out from the chase alone which
+rule it is following, moment by moment. The results browser replays the real chases of the three
+datasets, with the pursuer's path coloured by the decoded rule and the fitted values beside it; it
+reads only the committed result files.
 
 ## Layout
 

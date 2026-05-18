@@ -35,8 +35,9 @@ LABELS = {
     "holmgren2021": "mouse and cricket (replication)",
     "mabe22": "mouse and mouse",
 }
+REPO = "https://github.com/eigenreza/markov-switching-pursuit"
 
-st.set_page_config(page_title="Anticipate or react?", layout="wide")
+st.set_page_config(page_title="Anticipate or react? Markov-switching pursuit", layout="wide")
 apply_style()
 
 
@@ -136,10 +137,13 @@ def run_playground(target_kind, law, tau, N, gain, delay, noise, switch, seed):
 
 
 def page_playground():
-    st.header("Playground: simulate a chase and watch the inference")
+    st.header("Playground: build a chase and see what the model makes of it")
     st.write(
-        "Pick how the target moves and which guidance law the pursuer follows, then see the chase and "
-        "the posterior probability of each law at every frame, fitted on this one chase."
+        "Set up a chase of your own. Choose how the target moves, which rule the pursuer steers by, and "
+        "how quick, delayed and noisy its steering is. The model is then fitted to this one chase without "
+        "being told the rule. The coloured strip under the track shows, moment by moment, how likely it "
+        "thinks each rule is, and the dashed line marks what the pursuer was really doing. Tick the switch "
+        "box to make the pursuer change to pure pursuit partway through, and see whether the model notices."
     )
     c1, c2 = st.columns([1, 2])
     with c1:
@@ -198,7 +202,14 @@ def load_results(dataset: str):
 
 
 def page_browser():
-    st.header("Results browser: the real chases")
+    st.header("Results browser: real mouse chases")
+    st.write(
+        "These are real chases from three public recordings: two of mice hunting crickets and one of mice "
+        "chasing other mice. Pick a chase and drag the play slider to replay it. The pursuer's path is "
+        "coloured by the rule the model decoded, and the strip below shows how sure the model was at each "
+        "moment. On the right are the values fitted to the whole dataset, with their uncertainty, and a "
+        "short summary of the chase you picked."
+    )
     datasets = [d for d in LABELS if (RESULTS / "fits" / d / "posteriors_frames.csv").exists()]
     if not datasets:
         st.info("No fitted results found under results/fits.")
@@ -275,7 +286,27 @@ def page_browser():
 
 
 page = st.sidebar.radio("page", ["Playground", "Results browser"])
-st.sidebar.markdown("Anticipate or react? Mouse chases measured against the pursuit game.")
+st.sidebar.markdown("---")
+st.sidebar.markdown(
+    f"Developed by Reza Azad Gholami.\n\nCode, results and the paper: "
+    f"[github.com/eigenreza/markov-switching-pursuit]({REPO})"
+)
+st.sidebar.caption(
+    "The real chases come from public recordings: Michaiel, Abe and Niell (2020) and Holmgren et al. "
+    "(2021), mice hunting crickets, and the MABe22 benchmark of Sun et al., mice chasing mice. Results "
+    "derived from MABe22 are shared under "
+    "[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/)."
+)
+
+st.title("Anticipate or react?")
+st.write(
+    "When a mouse chases its prey, does it run at where the prey is, or at where the prey is about to be? "
+    "Pursuit theory offers a few steering rules for this. Pure pursuit aims straight at the target, lead "
+    "pursuit aims at where the target will be a moment later, and proportional navigation turns just enough "
+    "to keep the target at a steady bearing. This app lets you watch a model work out, moment by moment, "
+    "which of these rules a pursuer is following, and browse what it found in real recordings of mice. "
+    "Switch between the two pages on the left."
+)
 if page == "Playground":
     page_playground()
 else:
