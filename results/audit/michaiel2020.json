@@ -1,0 +1,133 @@
+{
+ "dataset": "michaiel2020",
+ "fps_native": 30,
+ "fps_stored": 60,
+ "fps_analysis": 30.0,
+ "px_per_cm": 27.0,
+ "arena_fit_scale_px_per_cm": [
+  24.555555555555557,
+  20.378050996941848
+ ],
+ "n_animals": 7,
+ "n_clips": 105,
+ "n_clips_used": 98,
+ "yaw_screen": {
+  "max_flip_rate": 0.01,
+  "flip_rad": 1.0,
+  "excluded_clips": [
+   {
+    "animal": "J470c",
+    "session": "1",
+    "clip": "0",
+    "flip_rate": 0.0536,
+    "n_frames": 5919
+   },
+   {
+    "animal": "J470c",
+    "session": "3",
+    "clip": "0",
+    "flip_rate": 0.0814,
+    "n_frames": 4142
+   },
+   {
+    "animal": "J470c",
+    "session": "4",
+    "clip": "0",
+    "flip_rate": 0.0248,
+    "n_frames": 2405
+   },
+   {
+    "animal": "J470c",
+    "session": "4",
+    "clip": "2",
+    "flip_rate": 0.0283,
+    "n_frames": 1105
+   },
+   {
+    "animal": "J470c",
+    "session": "4",
+    "clip": "6",
+    "flip_rate": 0.0385,
+    "n_frames": 6428
+   },
+   {
+    "animal": "J475c",
+    "session": "1",
+    "clip": "0",
+    "flip_rate": 0.0167,
+    "n_frames": 1363
+   },
+   {
+    "animal": "J475c",
+    "session": "1",
+    "clip": "2",
+    "flip_rate": 0.0178,
+    "n_frames": 2962
+   }
+  ],
+  "n_excluded_frames": 24324,
+  "kept_flip_rate_median": 0.0,
+  "kept_flip_rate_max": 0.006993006993006993
+ },
+ "minutes_per_animal": {
+  "J462a": 20.1,
+  "J462b": 27.7,
+  "J462c": 18.2,
+  "J463b": 1.2,
+  "J463c": 2.3,
+  "J470c": 20.8,
+  "J475c": 14.5
+ },
+ "cricket_tracked_fraction_mean": 0.486,
+ "heading": {
+  "heading_sign": 1.0,
+  "heading_offset_rad": 0.0,
+  "heading_vs_travel_median_abs_error_deg": 10.406387955534605
+ },
+ "segmentation": {
+  "min_pursuer_speed": 10.0,
+  "min_closing_speed": 5.0,
+  "max_bearing_deg": 60.0,
+  "min_start_range": 8.0,
+  "contact_range": 3.0,
+  "stall_window_s": 0.5,
+  "min_duration_s": 0.5,
+  "smooth_window_s": 0.1,
+  "max_gap_frames": 5
+ },
+ "n_chases": 485,
+ "n_rejected_by_contract": 12,
+ "chase_duration_s": {
+  "median": 0.9666666666666667,
+  "q25": 0.7,
+  "q75": 1.4,
+  "max": 6.766666666666667
+ },
+ "n_chases_ge_1s": 231,
+ "n_chases_ge_2s": 54,
+ "n_chases_target_moving_gt_3cm_s": 64,
+ "end_reasons": {
+  "clip_end": 1,
+  "contact": 15,
+  "stall": 163,
+  "track_loss": 306
+ },
+ "chases_per_animal": {
+  "J462a": 128,
+  "J462b": 132,
+  "J462c": 106,
+  "J463b": 14,
+  "J463c": 15,
+  "J470c": 41,
+  "J475c": 49
+ },
+ "chases_per_animal_target_moving": {
+  "J462a": 18,
+  "J462b": 14,
+  "J462c": 13,
+  "J463b": 6,
+  "J463c": 2,
+  "J470c": 9,
+  "J475c": 2
+ }
+}

@@ -1,0 +1,6 @@
+dataset,split,chases,animals,frames,informative_frames,median_duration_s,fps
+mouse and cricket (primary),dev,210,4,7713,748,0.97,30.0
+mouse and cricket (primary),held,275,3,9571,1022,0.93,30.0
+mouse and cricket (replication),replication,177,3,8245,3125,1.29,28.6
+mouse and mouse,dev,5485,1987,286947,193415,1.47,30.0
+mouse and mouse,held,7748,2767,400499,261207,1.47,30.0

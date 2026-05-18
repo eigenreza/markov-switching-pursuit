@@ -1,0 +1,107 @@
+# Dataset registry. Identifiers, licences, sampling, and the facts established in the audit.
+# Raw downloads live under data/raw/<key>/ and are never committed. Derived tables live under
+# data/derived/<key>/ and are committed when small.
+#
+# Status values: primary, secondary_replication, conspecific, fallback, not_a_data_source.
+
+datasets:
+
+  michaiel2020:
+    status: primary
+    title: Dynamics of gaze control during prey capture in freely moving mice (behavioural data)
+    doi: 10.5061/dryad.8cz8w9gmw
+    mirror: https://zenodo.org/records/3975832
+    licence: CC0-1.0
+    species: mouse pursuing live cricket
+    pursuer: mouse head centre (DeepLabCut points on the head mount)
+    target: cricket centre (DeepLabCut)
+    arena_cm: [45.0, 38.0]          # as stated in the article; see audit note on pixel scale
+    native_fps: 30                   # overhead camera
+    stored_fps: 60                   # series were resampled onto the eye-camera time base
+    analysis_fps: 30                 # every second sample, to avoid interpolation artefacts
+    px_per_cm: 27.0                  # the authors' calibration; provisional, see open issues
+    animals: 7
+    clips: 105
+    files:
+      - name: Michaiel_et_al.2020_fullDataset.mat
+        md5: 9e78a6d64f5de8461706b4722bd6dcaa
+        size: 140435158
+      - name: compileAllAnimals_CONTROL_090219.mat
+        md5: 6346adb5d919b40ad6e8378b81dba462
+        size: 9892482
+      - name: readme.txt
+        md5: e1f5cd277556028ae5e2a8454d9f6da8
+        size: 5723
+
+  holmgren2021:
+    status: secondary_replication   # fitted once with the frozen model, never used for design choices
+    title: Visual pursuit behavior in mice maintains the pursued prey on the retinal region with least optic flow (tracking data)
+    doi: 10.5061/dryad.2z34tmpnc
+    mirror: https://zenodo.org/records/5576696
+    licence: CC0-1.0
+    species: mouse pursuing live cricket, olfactory and auditory cues masked
+    pursuer: head position and orientation (quaternion) from infrared head tracking
+    target: cricket position, three-dimensional, from four cameras
+    native_fps: 200
+    analysis_fps: 200
+    units: centimetres in the scanned-arena frame
+    animals: 3
+    files:
+      - name: trajectories.zip
+        md5: 10a2926544b29270d2872da4cb843fca
+        size: 56860490
+      - name: behavioral_classifications.zip
+        md5: 02251285cbeb95516e8854cd6184f10b
+        size: 173627
+      - name: meshes.zip
+        md5: 547bdf6375043eb117e418d5494448a3
+        size: 316386
+      - name: README.txt
+        md5: 8b035a647eaa0b9a7305077ac6783730
+        size: 2091
+
+  mabe22:
+    status: conspecific
+    title: MABe22 mouse triplets (pose and frame-level labels)
+    doi: 10.22002/rdsa8-rde65
+    record: https://data.caltech.edu/records/rdsa8-rde65
+    licence: CC-BY-NC-SA (stated in the dataset paper's datasheet; the record page carries no licence field)
+    species: mouse pursuing mouse (three adult males, C57BL/6J or BTBR)
+    keypoints: [nose, left_ear, right_ear, neck, body_centroid, tail_base, tail_middle, tail_tip, left_fore_paw, right_fore_paw, left_hind_paw, right_hind_paw]
+    arena_cm: [52.0, 52.0]
+    native_fps: 30
+    analysis_fps: 30
+    sequence_frames: 1800
+    missing_marker_encoding: zero_zero
+    files:
+      - name: mouse_frame_number_map.npy
+        md5: ffc1dcae90176cdac4ff4fe123e18f25
+        size: 83594
+      - name: mouse_user_train.npy
+        md5: 389bc12c9ad49b7cb50b531707b448a5
+        size: 417845925
+      - name: mouse_triplet_test.npy
+        md5: f43f0f8824ffe6a4496eaf3ba7559d5c
+        size: 1937000000
+      - name: mouse_triplets_test_labels.npy
+        md5: 5a54f2d29a13a256aabbefc61a633176
+        size: 349861464
+      - name: mouse_submission_keypoints.npy
+        md5: 68a9fe1fe71225787a4dae6369acc9dc
+        size: 948861986
+      - name: mouse_submission_labels.npy
+        md5: 7f10c2b676e7dd8b4348423f0ee0aa8a
+        size: 171372184
+
+
+
+# Provisional segmentation thresholds used in the audit. They are frozen only after the
+# development-set work; the frozen values are given in docs/data.md.
+segmentation_provisional:
+  min_pursuer_speed_cm_s: 10.0
+  min_closing_speed_cm_s: 5.0
+  max_bearing_deg: 60.0
+  min_start_range_cm: 8.0
+  contact_range_cm: 3.0
+  stall_window_s: 0.5
+  min_duration_s: 0.5

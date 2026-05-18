@@ -1,0 +1,91 @@
+{
+ "dataset": "mabe22",
+ "fps": 30.0,
+ "arena_cm": 52.0,
+ "keypoints": [
+  "nose",
+  "left_ear",
+  "right_ear",
+  "neck",
+  "left_fore_paw",
+  "right_fore_paw",
+  "centre_back",
+  "left_hind_paw",
+  "right_hind_paw",
+  "tail_base",
+  "tail_middle",
+  "tail_tip"
+ ],
+ "licence": "CC-BY-NC-SA (dataset paper datasheet)",
+ "files": {
+  "mouse_user_train.npy": {
+   "file": "mouse_user_train.npy",
+   "n_sequences": 784,
+   "hours": 13.066666666666666,
+   "px_per_cm": 8.163461538461538,
+   "median_nose_to_tail_base_cm": 5.407936314918699,
+   "n_rejected_by_contract": 9,
+   "labelled_chase_bouts": 23,
+   "labelled_bout_frames_median": 41.0,
+   "labelled_bout_frames_max": 62,
+   "labelled_bouts_recovered_by_rule": 16
+  },
+  "mouse_submission_keypoints.npy": {
+   "file": "mouse_submission_keypoints.npy",
+   "n_sequences": 1830,
+   "hours": 30.5,
+   "px_per_cm": 8.182692307692308,
+   "median_nose_to_tail_base_cm": 5.382755385985206,
+   "n_rejected_by_contract": 23,
+   "labelled_chase_bouts": 37,
+   "labelled_bout_frames_median": 38.0,
+   "labelled_bout_frames_max": 71,
+   "labelled_bouts_recovered_by_rule": 20
+  },
+  "mouse_triplet_test.npy": {
+   "file": "mouse_triplet_test.npy",
+   "n_sequences": 3736,
+   "hours": 62.266666666666666,
+   "px_per_cm": 12.788461538461538,
+   "median_nose_to_tail_base_cm": 5.392726626823464,
+   "n_rejected_by_contract": 96,
+   "labelled_chase_bouts": 72,
+   "labelled_bout_frames_median": 40.0,
+   "labelled_bout_frames_max": 100,
+   "labelled_bouts_recovered_by_rule": 46
+  }
+ },
+ "n_sequences": 6350,
+ "hours": 105.83333333333333,
+ "labelled_chase_bouts": 132,
+ "labelled_bouts_recovered_by_rule": 82,
+ "segmentation": {
+  "min_pursuer_speed": 10.0,
+  "min_closing_speed": 5.0,
+  "max_bearing_deg": 60.0,
+  "min_start_range": 8.0,
+  "contact_range": 3.0,
+  "stall_window_s": 0.5,
+  "min_duration_s": 0.5,
+  "smooth_window_s": 0.1,
+  "max_gap_frames": 5,
+  "min_target_speed_mean": 5.0
+ },
+ "n_chases": 13233,
+ "n_rejected_by_contract": 128,
+ "chase_duration_s": {
+  "median": 1.4666666666666666,
+  "q25": 1.0,
+  "q75": 2.2,
+  "max": 8.6
+ },
+ "n_chases_ge_1s": 10072,
+ "n_chases_ge_2s": 4118,
+ "n_chases_ge_3s": 1437,
+ "end_reasons": {
+  "clip_end": 258,
+  "contact": 1015,
+  "stall": 11639,
+  "track_loss": 321
+ }
+}

@@ -1,0 +1,26 @@
+{
+ "n_conditions": 89,
+ "n_chases": 2165,
+ "n_rejected_short": 15,
+ "n_frames": 214799,
+ "base_seed": 20,
+ "config_sha256": "61ae4d37500b60ba1df31f00358ded9c5ba32df5d0948891355073f2147b4ad8",
+ "frames_sha256": "899ccc403ae1a9389379c24ce14b7fc02a28eb7daa2d4cc58b151fb4f558c659",
+ "chases_per_group": {
+  "misspecified": 356,
+  "parameters": 611,
+  "realistic": 240,
+  "realistic_switching": 80,
+  "single": 479,
+  "switching": 399
+ },
+ "duration_s": {
+  "median": 2.7333333333333334,
+  "min": 0.5,
+  "max": 10.0
+ },
+ "end_reasons": {
+  "capture": 1886,
+  "clip_end": 279
+ }
+}

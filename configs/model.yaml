@@ -1,0 +1,53 @@
+# Inference settings shared by the recovery study and the real-data fits.
+inference:
+  delays: [0, 1, 2, 3, 4, 5, 6, 7, 8]  # motor delay grid, frames at 30 Hz (0 to 267 ms)
+  tau_bounds: [0.0, 1.5]            # lead time, seconds
+  n_iter: 200
+  tol: 1.0e-6   # relative change of the log-likelihood below which the fit has converged
+  n_restarts: 2
+  profile_n_iter: 30                # lighter settings while profiling the delay
+  profile_n_restarts: 1
+  l2: 1.0e-2                        # ridge on the input-dependent transition weights
+  manoeuvre:
+    lag_frames: 3
+    heading_change_deg: 60.0
+    speed_change_cm_s: 15.0
+    min_speed_cm_s: 3.0
+    recent_frames: 6
+    vel_window: 2                   # causal target-velocity window for the law regressors, frames
+
+recovery:
+  lengths_frames: [30, 60, 120, 180]  # truncation lengths for the length sweep (1, 2, 4, 6 s)
+  detection_level: 0.95               # the detection threshold is this quantile of the null gap
+  null_prefixes: [single, misspec_measurement]   # single-law chases with and without tracking noise form the null
+  bootstrap_B: 100
+  calibration_bins: 10
+  accuracy_target: 0.9                # for the recovery limits
+  detection_target: 0.8
+  false_detection_max: 0.1
+  example_noise: 0.05
+  seed: 0
+
+real:
+  informative_speed: 3.0              # cm/s; frames with the target faster than this separate the laws
+  seed: 0
+  bootstrap_params: { default: 100, mabe22: 40 }    # chase-level bootstrap of the development parameters
+  null_B: { default: 200, mabe22: 200 }              # parametric-bootstrap replicates for the switching null
+  bootstrap_bins: { default: 30, mabe22: 15 }        # bootstrap within target-speed and range bins
+  obs_pos_sd: 0.2                     # cm, tracking noise added in the parametric null
+  obs_heading_sd: 0.05                # rad, tracking noise added in the parametric null
+  frames_csv_chases: 300              # per-frame posteriors kept in the committed csv (longest chases)
+  contact_radius: 3.0                 # cm, capture radius for the optimal capture time
+  manoeuvre_bootstrap: 500
+  manoeuvre_permutations: 500
+  cross_correlation_shuffles: 300
+
+followup:                              # the post-freeze library with a persistence state
+  null_B: { default: 30, mabe22: 20 }
+  bootstrap_params: { default: 50, mabe22: 20 }
+  bootstrap_bins: { default: 15, mabe22: 10 }
+
+sensitivity:                           # the arena-fit scale of the primary dataset
+  null_B: 30
+  bootstrap_params: 50
+  bootstrap_bins: 15

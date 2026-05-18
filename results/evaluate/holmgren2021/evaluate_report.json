@@ -1,0 +1,64 @@
+{
+ "dataset": "holmgren2021",
+ "split": "replication",
+ "delay_frames": 1,
+ "n_chases": 177,
+ "optimal": {
+  "distance_rad_median": 0.5364391212554067,
+  "distance_rad_q25": 0.34989578829260565,
+  "distance_rad_q75": 0.7831283587160717,
+  "distance_informative_rad_median": 0.6280277171390405,
+  "distance_to_pure_pursuit_rad_median": 0.4408132600231552,
+  "distance_by_animal": {
+   "f001": 0.5299230465060842,
+   "f002": 0.4913249881350605,
+   "f003": 0.5665645815948963
+  },
+  "n_contact_chases": 55,
+  "optimal_captured_within_chase_fraction": 0.5254237288135594,
+  "capture_time_ratio_actual_over_optimal_median": 1.153846153846154,
+  "capture_time_actual_median_s": 1.26,
+  "capture_time_optimal_median_s": 1.015
+ },
+ "manoeuvre_test": {
+  "coefficients": {
+   "intercept": {
+    "estimate": -2.8345321236253036,
+    "lo": -3.0610308450575263,
+    "hi": -2.6268710103565236
+   },
+   "range_per_10cm": {
+    "estimate": -0.38271856890124883,
+    "lo": -0.5448130274567974,
+    "hi": -0.26941109204552904
+   },
+   "closing_per_10cm_s": {
+    "estimate": -0.0648207640431881,
+    "lo": -0.09336244998197694,
+    "hi": -0.027928325903217057
+   },
+   "p_steering_prev": {
+    "estimate": 0.08388187346758558,
+    "lo": -0.5789950132670373,
+    "hi": 0.5983538487148926
+   }
+  },
+  "permutation_p_steering": 0.5548902195608783,
+  "permutation_null_mean": 0.22947166190381052,
+  "permutation_null_sd": 0.236592195038755,
+  "within_chase_effect": -0.14558978843622494,
+  "n_frames": 7360,
+  "n_chases": 177,
+  "n_manoeuvres": 268,
+  "manoeuvre_rate_per_frame_by_pursuer_state": {
+   "non-steering": {
+    "rate": 0.03600867678958785,
+    "n_frames": 6915
+   },
+   "steering": {
+    "rate": 0.04269662921348315,
+    "n_frames": 445
+   }
+  }
+ }
+}

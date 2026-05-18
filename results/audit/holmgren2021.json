@@ -1,0 +1,87 @@
+{
+ "dataset": "holmgren2021",
+ "fps": 200.0,
+ "units": "cm (scan frame)",
+ "n_animals": 3,
+ "per_mouse_tracking": {
+  "f001": {
+   "forward_axis": "-z",
+   "heading_vs_travel_median_abs_error_deg": 9.91490602523282,
+   "n_rows": 276925,
+   "tracked_fraction_head": 0.9432012277692516,
+   "tracked_fraction_cricket": 0.05674821702627065,
+   "n_rejected": 5
+  },
+  "f002": {
+   "forward_axis": "-z",
+   "heading_vs_travel_median_abs_error_deg": 10.431331951294563,
+   "n_rows": 547118,
+   "tracked_fraction_head": 0.12158254709221776,
+   "tracked_fraction_cricket": 0.26866781937351725,
+   "n_rejected": 26
+  },
+  "f003": {
+   "forward_axis": "-z",
+   "heading_vs_travel_median_abs_error_deg": 11.416334942998494,
+   "n_rows": 612161,
+   "tracked_fraction_head": 0.5575069303663579,
+   "tracked_fraction_cricket": 0.12108089211824993,
+   "n_rejected": 17
+  }
+ },
+ "author_phase_chases": {
+  "n": 74,
+  "duration_s": {
+   "median": 1.0125,
+   "q25": 0.76625,
+   "q75": 1.44625,
+   "max": 3.595
+  },
+  "n_ge_1s": 38,
+  "n_ge_2s": 8,
+  "n_target_moving_gt_3cm_s": 38,
+  "per_mouse": {
+   "f001": 7,
+   "f002": 38,
+   "f003": 29
+  },
+  "end_reasons": {
+   "contact": 74
+  }
+ },
+ "kinematic_rule_chases": {
+  "n": 177,
+  "duration_s": {
+   "median": 1.275,
+   "q25": 0.8,
+   "q75": 2.175,
+   "max": 6.36
+  },
+  "n_ge_1s": 110,
+  "n_ge_2s": 54,
+  "n_target_moving_gt_3cm_s": 120,
+  "per_mouse": {
+   "f001": 22,
+   "f002": 75,
+   "f003": 80
+  },
+  "end_reasons": {
+   "contact": 75,
+   "stall": 77,
+   "track_loss": 25
+  }
+ },
+ "segmentation": {
+  "min_pursuer_speed": 10.0,
+  "min_closing_speed": 5.0,
+  "max_bearing_deg": 60.0,
+  "min_start_range": 8.0,
+  "contact_range": 3.0,
+  "stall_window_s": 0.5,
+  "min_duration_s": 0.5,
+  "smooth_window_s": 0.1,
+  "max_gap_frames": 5
+ },
+ "rejections_author": 48,
+ "rejections_rule": 0
+}

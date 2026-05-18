@@ -1,0 +1,43 @@
+# raw data
+data/raw/
+
+# regenerable synthetic suite (python tasks.py simulate)
+data/derived/synthetic/*.parquet
+data/derived/*/chases_*.parquet
+data/derived/*/meta_*.parquet
+data/derived/*/posteriors_frames_*.parquet
+data/derived/*/evader_frames_*.parquet
+
+# python
+__pycache__/
+*.pyc
+.venv/
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# editors and OS
+.vscode/
+.idea/
+Thumbs.db
+.DS_Store
+
+# build
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk
+paper/*.synctex.gz
+paper/figures/
+# the paper is published as a PDF only; its LaTeX source stays private
+paper/*.tex
+paper/*.bib
+paper/sections/
+paper/tables/
+paper/numbers.aux
+
+# demo
+.streamlit/

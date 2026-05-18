@@ -1,0 +1,132 @@
+{
+ "classification_by_prefix_and_length": [
+  {
+   "prefix": "realistic_single",
+   "length_tag": 0,
+   "accuracy": 0.7,
+   "n": 60
+  },
+  {
+   "prefix": "realistic_single",
+   "length_tag": 30,
+   "accuracy": 0.4915254237288136,
+   "n": 59
+  },
+  {
+   "prefix": "realistic_single",
+   "length_tag": 60,
+   "accuracy": 0.5,
+   "n": 54
+  },
+  {
+   "prefix": "realistic_single",
+   "length_tag": 120,
+   "accuracy": 0.5348837209302325,
+   "n": 43
+  },
+  {
+   "prefix": "realistic_single",
+   "length_tag": 180,
+   "accuracy": 0.72,
+   "n": 25
+  },
+  {
+   "prefix": "realistic_still",
+   "length_tag": 0,
+   "accuracy": 0.45,
+   "n": 60
+  },
+  {
+   "prefix": "realistic_still",
+   "length_tag": 30,
+   "accuracy": 0.4166666666666667,
+   "n": 60
+  },
+  {
+   "prefix": "realistic_still",
+   "length_tag": 60,
+   "accuracy": 0.45454545454545453,
+   "n": 55
+  },
+  {
+   "prefix": "realistic_still",
+   "length_tag": 120,
+   "accuracy": 0.6,
+   "n": 30
+  }
+ ],
+ "switching_detection": {
+  "threshold": 0.052420677111723775,
+  "null_n": 120,
+  "by_prefix": {
+   "realistic_markov": {
+    "detected_fraction": 0.0,
+    "n": 20
+   },
+   "realistic_switch": {
+    "detected_fraction": 0.1,
+    "n": 20
+   }
+  }
+ },
+ "pooled": [
+  {
+   "prefix": "realistic_single",
+   "n_train": 60,
+   "n_test": 60,
+   "delay_est": 5,
+   "gain": 0.05053721350008879,
+   "tau": 0.5889086537983933,
+   "N": 0.6399235361608366,
+   "sigma": 0.07903000902663165,
+   "rho": 0.01415705925507639,
+   "eps": 0.06524942367909983,
+   "frame_accuracy": 0.47403074015908364,
+   "chase_vote_accuracy": 0.5333333333333333,
+   "posterior_occupancy": [
+    0.43349150073733206,
+    0.39395139869285417,
+    0.1725571005698143
+   ],
+   "true_law_mix": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+   ],
+   "stay_probability": [
+    0.9688817529590753,
+    0.9616155831577013,
+    0.981387945678931
+   ]
+  },
+  {
+   "prefix": "realistic_still",
+   "n_train": 60,
+   "n_test": 60,
+   "delay_est": 3,
+   "gain": 0.08158491210767355,
+   "tau": 0.2788855831735433,
+   "N": 0.13872518973798098,
+   "sigma": 0.07980594745451319,
+   "rho": 0.026400895964574803,
+   "eps": 0.07432033605013308,
+   "frame_accuracy": 0.3214413869990232,
+   "chase_vote_accuracy": 0.3333333333333333,
+   "posterior_occupancy": [
+    0.33265081328022905,
+    0.27474326082963885,
+    0.3926059258901323
+   ],
+   "true_law_mix": [
+    0.3333333333333333,
+    0.3333333333333333,
+    0.3333333333333333
+   ],
+   "stay_probability": [
+    0.9714091942530199,
+    0.8027507600346719,
+    0.8382230581352896
+   ]
+  }
+ ]
+}

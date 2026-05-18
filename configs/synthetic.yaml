@@ -1,0 +1,153 @@
+# The synthetic suite for the recovery study. Every chase is seeded from (base_seed, condition
+# name, replicate), so the suite regenerates exactly. Frame rate 30 Hz as in the primary data.
+base_seed: 20
+replicates: 20
+min_duration_s: 0.5
+
+defaults:
+  law: pure_pursuit
+  law_params: { gain: 0.5, delay: 2, noise: 0.05, tau: 0.5, N: 3.0 }
+  speed_mean: 20.0
+  speed_ar: 0.9
+  speed_sd: 2.0
+  target: { kind: constant_velocity, speed: 12.0, turn_rate_hz: 0.5, turn_sd: 1.0, heading_noise: 0.05 }
+  world: { fps: 30.0, arena: [45.0, 38.0], capture_radius: 2.0, max_frames: 150 }
+
+conditions:
+
+  # (a) single laws across noise levels. Chases are generated long (a target nearly as fast as
+  # the pursuer, 10 s cap); the recovery study truncates them to the lengths under test.
+  - name: single
+    group: single
+    target: { kind: constant_velocity, speed: 17.0, turn_rate_hz: 0.3, turn_sd: 1.0, heading_noise: 0.05 }
+    world: { arena: [90.0, 90.0], max_frames: 300 }
+    replicates: 40
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+      law_params.noise: [0.02, 0.05, 0.1, 0.2]
+
+  # (b) switching present, with a still or moving target
+  - name: switch_fixed
+    group: switching
+    world: { arena: [90.0, 90.0] }
+    law: lead_pursuit
+    target: { kind: constant_velocity, speed: 15.0, turn_rate_hz: 0.5 }
+    switching: { kind: fixed, fixed: [[0, lead_pursuit], [45, pure_pursuit]] }
+    grid:
+      law_params.noise: [0.05, 0.1]
+      world.max_frames: [120, 300]
+  - name: switch_manoeuvre
+    group: switching
+    law: lead_pursuit
+    target: { kind: jumper, jump_rate_hz: 0.8, jump_length: 8.0, jump_frames: 3, crawl_speed: 1.0 }
+    switching: { kind: manoeuvre_triggered, base_law: lead_pursuit, reaction_law: pure_pursuit, reaction_frames: 12 }
+    speed_mean: 12.0
+    grid:
+      law_params.noise: [0.05, 0.1]
+      world.max_frames: [120, 300]
+  - name: switch_manoeuvre_turn
+    group: switching
+    law: lead_pursuit
+    world: { arena: [90.0, 90.0] }
+    target: { kind: constant_velocity, speed: 14.0, turn_rate_hz: 1.0, turn_sd: 1.2, heading_noise: 0.05 }
+    switching: { kind: manoeuvre_triggered, base_law: lead_pursuit, reaction_law: pure_pursuit, reaction_frames: 15 }
+    grid:
+      law_params.noise: [0.05, 0.1]
+      world.max_frames: [120, 300]
+  - name: switch_range
+    group: switching
+    world: { arena: [90.0, 90.0] }
+    law: proportional_navigation
+    target: { kind: constant_velocity, speed: 15.0, turn_rate_hz: 0.5 }
+    switching: { kind: range_triggered, far_law: proportional_navigation, near_law: pure_pursuit, range_threshold: 15.0 }
+    grid:
+      law_params.noise: [0.05, 0.1]
+      world.max_frames: [120, 300]
+  - name: switch_markov
+    group: switching
+    world: { arena: [90.0, 90.0] }
+    law: pure_pursuit
+    target: { kind: constant_velocity, speed: 15.0, turn_rate_hz: 0.5 }
+    switching: { kind: markov, transition: [[0.97, 0.02, 0.01], [0.02, 0.97, 0.01], [0.01, 0.02, 0.97]] }
+    grid:
+      law_params.noise: [0.05, 0.1]
+      world.max_frames: [120, 300]
+
+  # (d) misspecified targets with a single law: false switches must stay at the nominal rate
+  - name: misspec_jumper
+    group: misspecified
+    target: { kind: jumper, jump_rate_hz: 0.8, jump_length: 8.0, jump_frames: 3, crawl_speed: 1.0 }
+    speed_mean: 12.0
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+      law_params.noise: [0.05, 0.1]
+  - name: misspec_evader
+    group: misspecified
+    target: { kind: evader, speed: 10.0, evade_range: 15.0, evade_gain: 0.6, turn_rate_hz: 0.3 }
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+      law_params.noise: [0.05, 0.1]
+  - name: misspec_measurement
+    group: misspecified
+    world: { obs_pos_sd: 0.3, obs_heading_sd: 0.05 }
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+      law_params.noise: [0.05, 0.1]
+
+  # (c) parameter recovery: delay, lead time, navigation constant
+  - name: delay
+    group: parameters
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+      law_params.delay: [0, 1, 2, 4, 6]
+  - name: tau
+    group: parameters
+    law: lead_pursuit
+    grid:
+      law_params.tau: [0.1, 0.3, 0.6, 1.0]
+      law_params.noise: [0.05, 0.1]
+  - name: navconst
+    group: parameters
+    law: proportional_navigation
+    grid:
+      law_params.N: [1.0, 2.0, 4.0, 8.0]
+      law_params.noise: [0.05, 0.1]
+
+  # (e) the regime of the real data: small per-frame gain, autocorrelated heading noise, tracking
+  # glitches, a target that is still much of the time, and moderate chase lengths
+  - name: realistic_single
+    group: realistic
+    law_params: { gain: 0.05, delay: 3, noise: 0.06, tau: 0.5, N: 3.0, noise_ar: 0.4 }
+    speed_mean: 15.0
+    target: { kind: constant_velocity, speed: 12.0, turn_rate_hz: 0.6, turn_sd: 1.0, heading_noise: 0.05 }
+    world: { arena: [90.0, 90.0], max_frames: 300, obs_pos_sd: 0.2, obs_heading_sd: 0.03, obs_glitch_rate: 0.03, obs_glitch_sd: 1.0 }
+    replicates: 40
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+  - name: realistic_still
+    group: realistic
+    law_params: { gain: 0.05, delay: 3, noise: 0.06, tau: 0.5, N: 3.0, noise_ar: 0.4 }
+    speed_mean: 12.0
+    target: { kind: jumper, jump_rate_hz: 0.5, jump_length: 6.0, jump_frames: 3, crawl_speed: 1.0 }
+    world: { arena: [60.0, 60.0], max_frames: 150, obs_pos_sd: 0.2, obs_heading_sd: 0.03, obs_glitch_rate: 0.03, obs_glitch_sd: 1.0 }
+    replicates: 40
+    grid:
+      law: [pure_pursuit, lead_pursuit, proportional_navigation]
+  - name: realistic_switch
+    group: realistic_switching
+    law: lead_pursuit
+    law_params: { gain: 0.05, delay: 3, noise: 0.06, tau: 0.5, N: 3.0, noise_ar: 0.4 }
+    speed_mean: 15.0
+    target: { kind: constant_velocity, speed: 12.0, turn_rate_hz: 1.0, turn_sd: 1.2, heading_noise: 0.05 }
+    world: { arena: [90.0, 90.0], max_frames: 300, obs_pos_sd: 0.2, obs_heading_sd: 0.03, obs_glitch_rate: 0.03, obs_glitch_sd: 1.0 }
+    switching: { kind: manoeuvre_triggered, base_law: lead_pursuit, reaction_law: pure_pursuit, reaction_frames: 15 }
+    replicates: 40
+  - name: realistic_markov
+    group: realistic_switching
+    law: pure_pursuit
+    law_params: { gain: 0.05, delay: 3, noise: 0.06, tau: 0.5, N: 3.0, noise_ar: 0.4 }
+    speed_mean: 15.0
+    target: { kind: constant_velocity, speed: 12.0, turn_rate_hz: 0.6, turn_sd: 1.0, heading_noise: 0.05 }
+    world: { arena: [90.0, 90.0], max_frames: 300, obs_pos_sd: 0.2, obs_heading_sd: 0.03, obs_glitch_rate: 0.03, obs_glitch_sd: 1.0 }
+    switching: { kind: markov, transition: [[0.98, 0.01, 0.01], [0.01, 0.98, 0.01], [0.01, 0.01, 0.98]] }
+    replicates: 40
