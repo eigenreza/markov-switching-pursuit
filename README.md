@@ -1,4 +1,4 @@
-# markov-switching-pursuit
+# Markov Switching Pursuit
 
 Anticipate or react? Mouse chases measured against the pursuit game.
 
