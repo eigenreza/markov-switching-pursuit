@@ -18,6 +18,8 @@ manoeuvres do not depend on the pursuer's state, and the chased mouse does not s
 the chaser in any form the evader library expresses. The numbers behind these sentences are in
 `results/`, and the paper is `paper/main.pdf`.
 
+[preprint (PDF)](paper/main.pdf)
+
 ![a held-out chase with the decoded state](results/animations/real_chase.gif)
 ![a simulated chase with a scripted switch from lead to pure pursuit, and the posterior catching it](results/animations/simulated_switch.gif)
 ![the steering probability around target manoeuvres in the mouse-and-mouse chases](results/animations/event_aligned.gif)
